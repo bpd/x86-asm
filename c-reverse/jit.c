@@ -40,12 +40,9 @@ int main(int argc, char** argv)
   //print_value(2);
   //print_value(3);
   
-  VirtualMemory vm;
-  
-  init_vm( &vm );
   uint32_t code_length = sizeof(fun_buf);
   
-  void* code_mem = vm.alloc( code_length ); // allocate 4k of writable/executable memory
+  void* code_mem = vm_alloc( code_length ); // allocate 4k of writable/executable memory
   
   memcpy( code_mem, fun_buf, code_length );
   
@@ -57,7 +54,7 @@ int main(int argc, char** argv)
   i = ret_one_ptr();
   printf("the value is: %d", i);
   
-  vm.free( code_mem, code_length );
+  vm_free( code_mem, code_length );
 
   return 0;
 }

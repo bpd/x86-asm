@@ -1,19 +1,13 @@
-
-
 #ifndef MEM_H
 #define MEM_H
 
 #include <stdint.h>
 
-typedef struct VirtualMemory
-{
-  void* (*alloc)( uint32_t length );
-  
-  void (*free)( void* addr, uint32_t length );
-}
-VirtualMemory;
 
-void init_vm( VirtualMemory *vm );
+void* vm_alloc( uint32_t length );
+
+void vm_free( void* addr, uint64_t length );
+
 
 // [kjit - OS]
 #if defined(WINDOWS) || defined(__WINDOWS__) || defined(_WIN32) || defined(_WIN64)

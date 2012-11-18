@@ -34,7 +34,7 @@ static uint64_t next_power_of_2(uint64_t base)
 
   #include <windows.h>
 
-  void init_vm_system()
+  static void init_vm_system()
   {
     SYSTEM_INFO info;
     GetSystemInfo(&info);
@@ -43,8 +43,12 @@ static uint64_t next_power_of_2(uint64_t base)
     page_size = next_power_of_2(info.dwPageSize);
   }
 
-  static void* code_alloc( uint32_t length )
+  void* vm_alloc( uint32_t length )
   {
+    if( alignment == -1 )
+    {
+      init_vm_system();
+    }
     // VirtualAlloc rounds allocated size to page size automatically.
     uint64_t msize = round_up(length);
 
@@ -55,7 +59,7 @@ static uint64_t next_power_of_2(uint64_t base)
                         PAGE_EXECUTE_READWRITE);
   }
 
-  static void code_free( void* addr, uint32_t length )
+  void vm_free( void* addr, uint64_t length )
   {
     VirtualFree(addr, 0, MEM_RELEASE);
   }
@@ -74,13 +78,17 @@ static uint64_t next_power_of_2(uint64_t base)
   # define MAP_ANONYMOUS MAP_ANON
   #endif
 
-  void init_vm_system()
+  static void init_vm_system()
   {
     alignment = page_size = getpagesize();
   }
 
-  static void* code_alloc( uint32_t length )
+  void* vm_alloc( uint32_t length )
   {
+    if( alignment == -1 )
+    {
+      init_vm_system();
+    }
     uint64_t msize = round_up(length, page_size);
     
     return mmap(NULL,
@@ -91,21 +99,10 @@ static uint64_t next_power_of_2(uint64_t base)
                 0 );
   }
 
-  static void code_free( void* addr, uint64_t length )
+  void vm_free( void* addr, uint64_t length )
   {
     munmap(addr, length);
   }
   
   
 #endif
-
-void init_vm( VirtualMemory *vm )
-{
-  if( alignment == -1 )
-  {
-    init_vm_system();
-  }
-
-  vm->alloc = &code_alloc;
-  vm->free = &code_free;
-}
