@@ -1,0 +1,55 @@
+
+# gcc main.c
+
+# gdb a
+GNU gdb (GDB) 7.3.1
+Reading symbols from /path/to/a...done.
+(gdb) disassem main
+Dump of assembler code for function main:
+   0x0000000000401514 <+0>:     push   %rbp
+   0x0000000000401515 <+1>:     mov    %rsp,%rbp
+   0x0000000000401518 <+4>:     sub    $0x20,%rsp
+   0x000000000040151c <+8>:     mov    %ecx,0x10(%rbp)
+   0x000000000040151f <+11>:    mov    %rdx,0x18(%rbp)
+   0x0000000000401523 <+15>:    callq  0x402690 <__main>
+   0x0000000000401528 <+20>:    mov    $0x2,%ecx
+   0x000000000040152d <+25>:    callq  0x4014f0 <print_value>
+   0x0000000000401532 <+30>:    mov    $0x3,%ecx
+   0x0000000000401537 <+35>:    callq  0x4014f0 <print_value>
+   0x000000000040153c <+40>:    mov    $0x0,%eax
+   0x0000000000401541 <+45>:    add    $0x20,%rsp
+   0x0000000000401545 <+49>:    pop    %rbp
+   0x0000000000401546 <+50>:    retq
+   0x0000000000401547 <+51>:    nop
+   0x0000000000401548 <+52>:    nop
+   0x0000000000401549 <+53>:    nop
+   0x000000000040154a <+54>:    nop
+   0x000000000040154b <+55>:    nop
+   0x000000000040154c <+56>:    nop
+   0x000000000040154d <+57>:    nop
+   0x000000000040154e <+58>:    nop
+   0x000000000040154f <+59>:    nop
+End of assembler dump.
+(gdb) disassem print_value
+Dump of assembler code for function print_value:
+   0x00000000004014f0 <+0>:     push   %rbp
+   0x00000000004014f1 <+1>:     mov    %rsp,%rbp
+   0x00000000004014f4 <+4>:     sub    $0x20,%rsp
+   0x00000000004014f8 <+8>:     mov    %ecx,0x10(%rbp)
+   0x00000000004014fb <+11>:    lea    0x2b1e(%rip),%rax        # 0x404020
+   0x0000000000401502 <+18>:    mov    0x10(%rbp),%edx
+   0x0000000000401505 <+21>:    mov    %rax,%rcx
+   0x0000000000401508 <+24>:    callq  0x402b40 <printf>
+   0x000000000040150d <+29>:    nop
+   0x000000000040150e <+30>:    add    $0x20,%rsp
+   0x0000000000401512 <+34>:    pop    %rbp
+   0x0000000000401513 <+35>:    retq
+End of assembler dump.
+(gdb) x/bx print_value
+0x4014f0 <print_value>: 0x55
+(gdb)x/bx print_value+1
+0x4014f1 <print_value>: 0x48
+(gdb)x/2bx print_value
+0x4014f0 <print_value>: 0x55   0x48
+(gdb)x/2bt print_value
+0x4014f0 <print_value>: 000110010   00011100

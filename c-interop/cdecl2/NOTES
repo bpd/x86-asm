@@ -1,0 +1,5 @@
+
+Interleave C and assembly function calls using cdecl calling conventions
+
+
+- use 'nm' command (GCC util) to show symbols for object files

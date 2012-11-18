@@ -1,0 +1,34 @@
+
+This is a collections of notes and one-off weekend projects that explore x86 assembler with FASM (Flat Assembler), x86 assember.
+
+FASM Docs:
+
+  http://flatassembler.net/docs.php?article=manual
+  
+  http://jakash3.wordpress.com/2010/07/23/fasm-tutorial-16-32-bit/
+
+General x86 docs:
+
+  http://en.wikibooks.org/wiki/X86_Disassembly/
+  
+  http://www.sandpile.org/
+
+  http://www.cs.virginia.edu/~evans/cs216/guides/x86.html
+  
+  http://siyobik.info.gf/main/reference
+
+Debugging:
+
+  For 64-bit debugging: FDBG: http://board.flatassembler.net/topic.php?t=9689
+  
+  For 32-bit debugging: OllyDbg: http://www.ollydbg.de/
+
+  
+File Formats:
+
+  PE File Format: http://msdn.microsoft.com/en-us/magazine/cc301805.aspx
+
+  Tiny PE: http://www.phreedom.org/solar/code/tinype/
+
+  Tiny ELF: http://www.muppetlabs.com/~breadbox/software/tiny/teensy.html
+
